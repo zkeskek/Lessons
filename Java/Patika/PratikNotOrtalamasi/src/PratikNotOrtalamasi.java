@@ -37,7 +37,12 @@ public class PratikNotOrtalamasi {
     public static void notHesapla(int math, int physics, int chemistry, int history, int music, int turkish){
         double result;
         double total = math + physics + chemistry + history + music + turkish;
+        String textResult;
         result = total / 6;
+        textResult = result > 60 ? "Sınıfı Geçti" : "Sınıfta Kaldı";
         System.out.println("Not Ortalamanız : " + result);
+        System.out.println("Durum : " + textResult);
+
+
     }
 }
