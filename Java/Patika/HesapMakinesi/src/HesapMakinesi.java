@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class HesapMakinesi {
+    // https://app.patika.dev/moduller/java101/pratik-hesap-mak-1
+
     static double sayi1;
     static double sayi2;
     static int islem;
