@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class KDVTutariHesapla {
     // https://app.patika.dev/moduller/java101/pratik-kdv-hesaplama
     public static void main(String[] args) {
-        final double vatRate = 0.18;
+        double vatRate = 0.18;
         double priceWithoutVat;
         double priceWithVat;
 
@@ -12,6 +12,8 @@ public class KDVTutariHesapla {
         try{
             System.out.print("Fiyat Giriniz : ");
             priceWithoutVat = scanner.nextDouble();
+
+            vatRate = priceWithoutVat > 1000 ? 0.08 : 0.18;
 
             priceWithVat = priceWithoutVat * vatRate + priceWithoutVat;
 
