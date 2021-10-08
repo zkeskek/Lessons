@@ -21,8 +21,13 @@ public class Minefield {
             }
 
             // max 20x20 olabilir
-            if(rowCount > 20 && columnCount > 20){
+            if(rowCount > 20 || columnCount > 20){
                 rowCount = columnCount = 20;
+            }
+
+            // min 3x3 olabilir
+            if(rowCount < 3 || columnCount < 3){
+                rowCount = columnCount = 3;
             }
         }catch (Exception e){
             System.out.println("Sadece sayı giriniz!");
@@ -58,6 +63,7 @@ public class Minefield {
 
             }catch (Exception e){
                 System.out.println("Lütfen sadece sayı giriniz");
+                scanner.nextLine();
                 continue;
             }
 
