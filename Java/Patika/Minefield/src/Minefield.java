@@ -19,6 +19,11 @@ public class Minefield {
                 System.out.println("Sadece pozitif sayı giriniz");
                 System.exit(0);
             }
+
+            // max 20x20 olabilir
+            if(rowCount > 20 && columnCount > 20){
+                rowCount = columnCount = 20;
+            }
         }catch (Exception e){
             System.out.println("Sadece sayı giriniz!");
             System.exit(0);
@@ -46,8 +51,8 @@ public class Minefield {
                 System.out.print("Sütun seçiniz : ");
                 column = scanner.nextInt();
 
-                if(row < 0 || column < 0){
-                    System.out.println("Lütfen negatif sayı girmeyiniz");
+                if(row <= 0 || column <= 0){
+                    System.out.println("Lütfen pozitif sayı giriniz");
                     continue;
                 }
 

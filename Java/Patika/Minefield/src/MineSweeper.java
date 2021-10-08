@@ -49,7 +49,9 @@ public class MineSweeper {
 
     // Kullanıcı matris üzerinden bir nokta seçmeli. Nokta seçimi için satır ve sütun değerlerini girmeli.
     public void selectIndex( int row, int column){
-
+        // kullanıcının seçtiği satır sütün 1 den başlar.
+        row--;
+        column--;
         // seçilen indisler matris sınırları içersindeyse ve daha önceden seçilmediyse
         if(this.isIndexAvailable(row,column)){
             this.isBomb(row, column);
