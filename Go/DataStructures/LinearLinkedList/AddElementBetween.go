@@ -1,4 +1,4 @@
-package LinkList
+package LinearLinkedList
 
 // Linear Sequential
 // Tek Yönlü Linklist

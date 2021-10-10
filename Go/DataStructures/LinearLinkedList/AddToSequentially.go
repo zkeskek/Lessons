@@ -1,4 +1,4 @@
-package LinkList
+package LinearLinkedList
 
 // fonksiyon her çağrıldığında verilen data değerini node objesi içersinde dolaşarak ilgili x değerinden büyük ise sağına, küçük ise soluna ekleyecektir.
 // sıralı ekleme işleminde, verinin büyüklük küçüklük durumuna göre ekleme yerleri değişecektir.
