@@ -79,13 +79,6 @@ func (node *Node) Delete(data int) {
 
 	iter := node
 
-	/*
-		55
-		66
-		12
-		22
-		33
-	*/
 	// root objesi silinmek istenirse
 	if iter.X == data {
 		for iter.Next != node {

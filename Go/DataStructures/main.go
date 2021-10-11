@@ -6,7 +6,10 @@ package main
 */
 
 import (
+	"fmt"
+
 	circularLinkedList "./CircularLinkedList"
+	doubleLinkedList "./DoubleLinkedList"
 	linearLinkedList "./LinearLinkedList"
 )
 
@@ -16,15 +19,36 @@ func main() {
 	// LinearLinkedList()
 
 	// Circular Linked List, Son node'un next'i root node'unu gösterir.
-	CircularLinkedList()
+	// CircularLinkedList()
 
 	// Double Linked List, Her node bir sonraki ve bir önceki node objesinin referansını tutar. Çift yönlü linkleme sağlanır.
-	// DoubleLinkedList()
+	DoubleLinkedList()
 
 }
 
 // Double Linked List
 func DoubleLinkedList() {
+	myDoubleLinkedList := doubleLinkedList.Node{X: 5, Next: nil, Prev: nil}
+
+	myDoubleLinkedList.AddToEnd(3)
+	myDoubleLinkedList.AddToEnd(9)
+	myDoubleLinkedList.AddToEnd(12)
+	myDoubleLinkedList.AddToEnd(15)
+
+	myDoubleLinkedList.Delete(3)
+	myDoubleLinkedList.Delete(12)
+
+	myDoubleLinkedList.AddToBetween(20, 5)
+
+	myDoubleLinkedList.AddToSequentially(4)
+	myDoubleLinkedList.AddToSequentially(11)
+
+	myDoubleLinkedList.AddToStart(1)
+	myDoubleLinkedList.AddToStart(2)
+
+	myDoubleLinkedList.Print(false)
+	fmt.Println("-----")
+	myDoubleLinkedList.Print(true)
 
 }
 
