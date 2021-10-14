@@ -31,8 +31,14 @@ public class FixtureBuilder {
                 fixture.getHost().setO(fixture.getHost().getO() +1);
                 fixture.getAway().setO(fixture.getAway().getO() +1);
                 // avaraj
-                fixture.getHost().setAv(fixture.getHost().getAv() + fixture.getHostGoal());
-                fixture.getAway().setAv(fixture.getAway().getAv() + fixture.getAwayGoal());
+                fixture.getHost().setA(fixture.getHost().getA() + fixture.getHostGoal());
+                fixture.getHost().setY(fixture.getHost().getY() + fixture.getAwayGoal());
+                fixture.getHost().setAv(fixture.getHost().getA() - fixture.getHost().getY());
+
+                fixture.getAway().setA(fixture.getAway().getA() + fixture.getAwayGoal());
+                fixture.getAway().setY(fixture.getAway().getY() + fixture.getHostGoal());
+                fixture.getAway().setAv(fixture.getAway().getA() - fixture.getAway().getY());
+
                 // galibiyet, beraberlik, mağlubiyet, puan
                 if(fixture.getHostGoal() > fixture.getAwayGoal()){
                     fixture.getHost().setG(fixture.getHost().getG() +1);
