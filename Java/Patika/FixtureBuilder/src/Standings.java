@@ -4,7 +4,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class Standings implements Comparable<Standings>{
-    private Team team;
+    private final Team team;
 
     public Standings(Team team) {
         this.team = team;
@@ -23,20 +23,18 @@ public class Standings implements Comparable<Standings>{
     }
 
     public static void print(Queue<Standings> standings){
-        String blank ="";
+        StringBuilder blank = new StringBuilder();
         Team team;
         boolean title = true;
         while (!standings.isEmpty()){
             team = Objects.requireNonNull(standings.poll()).getTeam();
-            for (int i = 0; i < 25 - team.getName().length(); i++) {
-                blank += " ";
-            }
+            blank.append(" ".repeat(Math.max(0, 25 - team.getName().length())));
             if(title){
                 System.out.println("Takım Adı"+blank+" O   G   B   M   A   Y   Av  P");
                 System.out.println("------------------------------------------------------");
             }
             System.out.println(team.getName()+blank+team.getO()+"   "+team.getG()+"   "+team.getB()+"   "+team.getM()+"   "+team.getA()+"   "+team.getY()+"   "+team.getAv()+"   "+team.getP());
-            blank = "";
+            blank = new StringBuilder();
             title = false;
         }
         System.out.println();
