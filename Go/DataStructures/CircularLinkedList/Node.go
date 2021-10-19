@@ -11,14 +11,14 @@ type Node struct {
 	Next *Node
 }
 
-// Başına Ekle Methodu
+// AddToStart Başına Ekle Methodu
 func (node *Node) AddToStart(data int) {
 	temp := *node
 	node.X = data
 	node.Next = &temp
 }
 
-// Sıralı Ekle Methodu
+// AddToSequentially Sıralı Ekle Methodu
 func (node *Node) AddToSequentially(data int) {
 
 	iter := node
@@ -49,7 +49,7 @@ func (node *Node) AddToSequentially(data int) {
 
 }
 
-// Araya Ekle Methodu
+// AddToBetween Araya Ekle Methodu
 func (node *Node) AddToBetween(data int, which int) {
 
 	for node.X != which {
@@ -63,7 +63,7 @@ func (node *Node) AddToBetween(data int, which int) {
 	node.Next.Next = temp.Next
 }
 
-// Sonuna Ekle Methodu
+// AddToEnd Sonuna Ekle Methodu
 func (node *Node) AddToEnd(data int) {
 	iter := node
 	for iter.Next != node {
@@ -72,7 +72,7 @@ func (node *Node) AddToEnd(data int) {
 	iter.Next = &Node{X: data, Next: node}
 }
 
-// Eleman Sil Methodu
+// Delete Eleman Sil Methodu
 func (node *Node) Delete(data int) {
 
 	// silmek istenen değer arada veya sonda bir değer ise iter objemizi silinecek node objesinin bir öncekine kadar ilerletiyoruz
@@ -103,7 +103,7 @@ func (node *Node) Delete(data int) {
 
 }
 
-// Yazdır
+// Print Yazdır
 func (node *Node) Print() {
 	// dairesel link list olduğu için ilk başta iter objesi tanımlıyoruz ve döngüden önce iterin ilk objesini yazdırarak bir sonraki node objesine geçiyoruz.
 	iter := node

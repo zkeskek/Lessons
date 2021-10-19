@@ -1,6 +1,6 @@
 package LinearLinkedList
 
-// fonksiyon her çağrıldığında verilen data değerini node objesi içersinde dolaşarak ilgili x değerinden büyük ise sağına, küçük ise soluna ekleyecektir.
+// AddToSequentially fonksiyon her çağrıldığında verilen data değerini node objesi içersinde dolaşarak ilgili x değerinden büyük ise sağına, küçük ise soluna ekleyecektir.
 // sıralı ekleme işleminde, verinin büyüklük küçüklük durumuna göre ekleme yerleri değişecektir.
 // bu durumda node objesinin en başıa, ortasına veya en sonuna ekleme işlemi gerçekleimiş olacaktır
 func AddToSequentially(root *Node, data int) {

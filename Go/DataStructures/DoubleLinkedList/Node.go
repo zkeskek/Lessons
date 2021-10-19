@@ -11,7 +11,7 @@ type Node struct {
 	Prev *Node
 }
 
-// Başına Ekle Methodu
+// AddToStart Başına Ekle Methodu
 func (node *Node) AddToStart(data int) {
 	temp := *node
 	node.X = data
@@ -21,7 +21,7 @@ func (node *Node) AddToStart(data int) {
 
 }
 
-// Sıralı Ekle Methodu
+// AddToSequentially Sıralı Ekle Methodu
 func (node *Node) AddToSequentially(data int) {
 
 	for node.Next != nil && node.Next.X < data {
@@ -36,7 +36,7 @@ func (node *Node) AddToSequentially(data int) {
 
 }
 
-// Araya Ekle Methodu
+// AddToBetween Araya Ekle Methodu
 func (node *Node) AddToBetween(data int, which int) {
 
 	for node.Next != nil && node.X != which {
@@ -51,7 +51,7 @@ func (node *Node) AddToBetween(data int, which int) {
 
 }
 
-// Sonuna Ekle Methodu
+// AddToEnd Sonuna Ekle Methodu
 func (node *Node) AddToEnd(data int) {
 	iter := node
 	for iter.Next != nil {
@@ -60,7 +60,7 @@ func (node *Node) AddToEnd(data int) {
 	iter.Next = &Node{X: data, Next: nil, Prev: iter}
 }
 
-// Eleman Sil Methodu
+// Delete Eleman Sil Methodu
 func (node *Node) Delete(data int) {
 
 	// silmek istenen değer arada veya sonda bir değer ise iter objemizi silinecek node objesinin bir öncekine kadar ilerletiyoruz
@@ -77,7 +77,7 @@ func (node *Node) Delete(data int) {
 
 }
 
-// Yazdır
+// Print Yazdır
 func (node *Node) Print(reverse bool) {
 	iter := node
 	if reverse { // sondan başa yazdır

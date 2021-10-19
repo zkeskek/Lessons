@@ -6,29 +6,28 @@ package main
 */
 
 import (
+	"DataStructures/CircularLinkedList"
+	"DataStructures/DoubleLinkedList"
+	"DataStructures/LinearLinkedList"
 	"fmt"
-
-	circularLinkedList "./CircularLinkedList"
-	doubleLinkedList "./DoubleLinkedList"
-	linearLinkedList "./LinearLinkedList"
 )
 
 func main() {
 
 	// Linear Linked List, Her node bir sonraki node objesinin referansını tutar.
-	// LinearLinkedList()
+	// linearLinkedList()
 
 	// Circular Linked List, Son node'un next'i root node'unu gösterir.
-	// CircularLinkedList()
+	// circularLinkedList()
 
 	// Double Linked List, Her node bir sonraki ve bir önceki node objesinin referansını tutar. Çift yönlü linkleme sağlanır.
-	DoubleLinkedList()
+	doubleLinkedList()
 
 }
 
 // Double Linked List
-func DoubleLinkedList() {
-	myDoubleLinkedList := doubleLinkedList.Node{X: 5, Next: nil, Prev: nil}
+func doubleLinkedList() {
+	myDoubleLinkedList := DoubleLinkedList.Node{X: 5, Next: nil, Prev: nil}
 
 	myDoubleLinkedList.AddToEnd(3)
 	myDoubleLinkedList.AddToEnd(9)
@@ -53,8 +52,8 @@ func DoubleLinkedList() {
 }
 
 // Circular Linked List
-func CircularLinkedList() {
-	myCircularLinkedList := circularLinkedList.Node{X: 12, Next: nil}
+func circularLinkedList() {
+	myCircularLinkedList := CircularLinkedList.Node{X: 12, Next: nil}
 	myCircularLinkedList.Next = &myCircularLinkedList
 
 	myCircularLinkedList.AddToEnd(33)
@@ -73,26 +72,26 @@ func CircularLinkedList() {
 }
 
 // Linear Linked List
-func LinearLinkedList() {
+func linearLinkedList() {
 
 	// ilk adımlar
-	// linearLinkedList.Approach()
+	// LinearLinkedList.Approach()
 
 	// Eleman ekleme ve yazdırma
-	// linearLinkedList.GenerateElement()
+	// LinearLinkedList.GenerateElement()
 
 	// Araya eleman ekleme ve harici yazdırma dosyası
-	// linearLinkedList.AddElementBetween()
+	// LinearLinkedList.AddElementBetween()
 
 	// Sıralı eleman ekleme
-	// linearLinkedList.AddSequentially()
+	// LinearLinkedList.AddSequentially()
 
 	// Eleman Silme
-	// linearLinkedList.DeleteElement()
+	// LinearLinkedList.DeleteElement()
 
 	// struct objesi üzerinden tüm methodları kullanabiliriz.
 	// yukarda yapılan örneklerin hepsi artık struct objemizin birer methodu haline geldi.
-	myLinearLinkedList := linearLinkedList.Node{X: 23, Next: nil}
+	myLinearLinkedList := LinearLinkedList.Node{X: 23, Next: nil}
 
 	myLinearLinkedList.AddToEnd(21)
 
