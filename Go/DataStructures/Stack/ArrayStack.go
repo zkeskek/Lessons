@@ -35,10 +35,8 @@ func (arr *ArrayStack) Pop() {
 	arr.Arr[arr.Index] = 0
 	if arr.Index <= arr.ArrSize / 4{
 		newArr := make([]int, arr.ArrSize / 2)
-		for i := 0; i < arr.ArrSize; i++ {
-			if arr.Arr[i] != 0 {
-				newArr[i] = arr.Arr[i]
-			}
+		for i := 0; i < arr.Index; i++ {
+			newArr[i] = arr.Arr[i]
 		}
 		arr.Arr = newArr
 		arr.ArrSize /= 2
