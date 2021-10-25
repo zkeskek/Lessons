@@ -158,4 +158,12 @@ func stackLinkedList(){
 	myArrayStack.Print()
 	myArrayStack.Pop()
 	myArrayStack.Print()
+	myArrayStack.Pop()
+	myArrayStack.Pop()
+	myArrayStack.Pop()
+	myArrayStack.Pop()
+	myArrayStack.Print()
+	myArrayStack.Push(55)
+	myArrayStack.Push(66)
+	myArrayStack.Print()
 }

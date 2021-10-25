@@ -20,19 +20,27 @@ func LinkedListStack(data int) ILinkedListStack{
 // Push Add to data
 func (arr *linkedListStack) Push(data int) {
 	iter := arr
-	for iter.Next != nil {
-		iter = iter.Next
+	if iter.X == -1{
+		iter.X = data
+	}else{
+		for iter.Next != nil {
+			iter = iter.Next
+		}
+		iter.Next = &linkedListStack{X: data, Next: nil}
 	}
-	iter.Next = &linkedListStack{X: data, Next: nil}
 }
 
 // Pop Remove to data
 func (arr *linkedListStack) Pop() {
 	iter := arr
-	for iter.Next.Next != nil {
-		iter = iter.Next
+	if iter.Next != nil{
+		for iter.Next.Next != nil {
+			iter = iter.Next
+		}
+		iter.Next = nil
+	}else{
+		arr.X = -1
 	}
-	iter.Next = nil
 }
 
 // Print Yazdır
