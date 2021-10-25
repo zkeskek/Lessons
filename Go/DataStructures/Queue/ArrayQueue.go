@@ -74,9 +74,9 @@ func (arr *arrayQueue) ReSort() {
 
 // Print Yazdır
 func (arr *arrayQueue) Print() {
-	fmt.Printf("len=%d cap=%d %v %v %v\n", len(arr.Arr), cap(arr.Arr), arr.Arr, arr.FirstIndex, arr.LastIndex)
-	/*for i := arr.FirstIndex; i < arr.LastIndex; i++ {
+	//fmt.Printf("len=%d cap=%d %v %v %v\n", len(arr.Arr), cap(arr.Arr), arr.Arr, arr.FirstIndex, arr.LastIndex)
+	for i := arr.FirstIndex; i < arr.LastIndex; i++ {
 		fmt.Printf("%v ", arr.Arr[i])
 	}
-	fmt.Println()*/
+	fmt.Println()
 }

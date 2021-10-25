@@ -32,14 +32,8 @@ func (arr *linkedListQueue) Enqueue(data int) {
 
 // Dequeue Remove to data
 func (arr *linkedListQueue) Dequeue() {
-	iter := arr
-	if iter.Next != nil{
-		for iter.Next.Next != nil {
-			iter = iter.Next
-		}
-		iter.Next = nil
-	}else{
-		arr.X = -1
+	if arr.Next != nil{
+		*arr = *arr.Next
 	}
 }
 

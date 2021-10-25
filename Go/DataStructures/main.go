@@ -33,10 +33,10 @@ func main() {
 	// stackLinkedList()
 
 	// Array Queue
-	queueArray()
+	// queueArray()
 
 	// Linked List Queue
-	// queueLinkedList()
+	queueLinkedList()
 
 }
 
