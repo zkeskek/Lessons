@@ -37,7 +37,6 @@ func (arr *arrayQueue) Enqueue(data int) {
 			arr.ReSort()
 		}
 	}
-
 	arr.Arr[arr.LastIndex] = data
 	arr.LastIndex++
 }
@@ -69,15 +68,15 @@ func (arr *arrayQueue) ReSort() {
 		sort++
 	}
 	arr.Arr = newArr
+	arr.LastIndex = arr.LastIndex - arr.FirstIndex
 	arr.FirstIndex = 0
-	arr.LastIndex = len(newArr)
 }
 
 // Print Yazdır
 func (arr *arrayQueue) Print() {
-	//fmt.Printf("len=%d cap=%d %v %v %v\n", len(arr.Arr), cap(arr.Arr), arr.Arr, arr.FirstIndex, arr.LastIndex)
-	for i := arr.FirstIndex; i < arr.LastIndex; i++ {
+	fmt.Printf("len=%d cap=%d %v %v %v\n", len(arr.Arr), cap(arr.Arr), arr.Arr, arr.FirstIndex, arr.LastIndex)
+	/*for i := arr.FirstIndex; i < arr.LastIndex; i++ {
 		fmt.Printf("%v ", arr.Arr[i])
 	}
-	fmt.Println()
+	fmt.Println()*/
 }
