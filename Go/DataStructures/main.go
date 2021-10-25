@@ -11,6 +11,7 @@ import (
 	"DataStructures/LinearLinkedList"
 	"DataStructures/Stack"
 	"DataStructures/Queue"
+	"DataStructures/Tree"
 	"fmt"
 
 )
@@ -36,7 +37,10 @@ func main() {
 	// queueArray()
 
 	// Linked List Queue
-	queueLinkedList()
+	// queueLinkedList()
+
+	// Binary Tree
+	binaryTree()
 
 }
 
@@ -232,4 +236,27 @@ func queueLinkedList(){
 	myArrayStack.Enqueue(55)
 	myArrayStack.Enqueue(66)
 	myArrayStack.Print()
+}
+
+// Binary Tree
+func binaryTree(){
+	myTree := Tree.BinaryTree(56)
+	myTree.Insert(200)
+	myTree.Insert(26)
+	myTree.Insert(190)
+	myTree.Insert(213)
+	myTree.Insert(18)
+	myTree.Insert(28)
+	myTree.Insert(12)
+	myTree.Insert(24)
+	myTree.Insert(27)
+	myTree.Print("NRL") // Infix: LNR-RNL, Prefix: NLR-NRL, Postfix: LRN, RLN
+	myTree.Search(100)
+	myTree.Search(24)
+	fmt.Println(myTree.Exists(100))
+	fmt.Println(myTree.Exists(24))
+	fmt.Printf("Max value: %v\n", myTree.Max())
+	fmt.Printf("Min value: %v\n", myTree.Min())
+	myTree.Delete(56)
+	myTree.Print("NRL")
 }
