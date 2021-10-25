@@ -34,6 +34,8 @@ func (arr *linkedListQueue) Enqueue(data int) {
 func (arr *linkedListQueue) Dequeue() {
 	if arr.Next != nil{
 		*arr = *arr.Next
+	}else{
+		arr.X = -1
 	}
 }
 
