@@ -9,7 +9,9 @@ import (
 	"DataStructures/CircularLinkedList"
 	"DataStructures/DoubleLinkedList"
 	"DataStructures/LinearLinkedList"
+	"DataStructures/Stack"
 	"fmt"
+
 )
 
 func main() {
@@ -21,7 +23,12 @@ func main() {
 	// circularLinkedList()
 
 	// Double Linked List, Her node bir sonraki ve bir önceki node objesinin referansını tutar. Çift yönlü linkleme sağlanır.
-	doubleLinkedList()
+	// doubleLinkedList()
+
+	// Array Stack
+	stackArray()
+
+	// Linked List Stack
 
 }
 
@@ -107,4 +114,29 @@ func linearLinkedList() {
 	myLinearLinkedList.Delete(23)
 
 	myLinearLinkedList.Print()
+}
+
+// Array Stack
+func stackArray(){
+	myArrayStack := Stack.ArrayStack{}
+	myArrayStack.Constructor()
+	fmt.Println(myArrayStack.ArrSize)
+	myArrayStack.Push(33)
+	myArrayStack.Push(55)
+	myArrayStack.Print()
+	myArrayStack.Push(65)
+	myArrayStack.Print()
+	myArrayStack.Push(76)
+	myArrayStack.Print()
+	myArrayStack.Push(86)
+	myArrayStack.Print()
+	fmt.Println(myArrayStack.ArrSize)
+	myArrayStack.Pop()
+	myArrayStack.Print()
+	myArrayStack.Pop()
+	myArrayStack.Print()
+	myArrayStack.Pop()
+	myArrayStack.Print()
+	fmt.Println(myArrayStack.ArrSize)
+
 }
