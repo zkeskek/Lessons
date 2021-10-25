@@ -2,21 +2,31 @@ package Stack
 
 import "fmt"
 
-type ArrayStack struct {
+type IArrayStack interface{
+	Push(data int)
+	Pop()
+	Print()
+}
+
+type arrayStack struct {
 	Arr []int
 	ArrSize int
 	Index int
 }
 
-// Constructor initialize
-func (arr *ArrayStack) Constructor(){
+func ArrayStack() IArrayStack{
+	return &arrayStack{[]int{0,0}, 2,0}
+}
+
+// Constructor initialize (manuel) -> but interface with auto constructor.
+func (arr *arrayStack) Constructor(){
 	arr.ArrSize = 2
 	arr.Index = 0
 	arr.Arr = []int{0,0}
 }
 
 // Push Add to data
-func (arr *ArrayStack) Push(data int) {
+func (arr *arrayStack) Push(data int) {
 	if arr.Index >= arr.ArrSize{
 		newArr := make([]int, arr.ArrSize * 2)
 		for i := 0; i < arr.ArrSize; i++ {
@@ -30,7 +40,7 @@ func (arr *ArrayStack) Push(data int) {
 }
 
 // Pop Remove to data
-func (arr *ArrayStack) Pop() {
+func (arr *arrayStack) Pop() {
 	arr.Index--
 	arr.Arr[arr.Index] = 0
 	if arr.Index <= arr.ArrSize / 4{
@@ -44,7 +54,7 @@ func (arr *ArrayStack) Pop() {
 }
 
 // Print Yazdır
-func (arr *ArrayStack) Print() {
+func (arr *arrayStack) Print() {
 	//fmt.Printf("len=%d cap=%d %v\n", len(arr.Arr), cap(arr.Arr), arr.Arr)
 	for i := 0; i < arr.Index; i++ {
 		fmt.Printf("%v ", arr.Arr[i])

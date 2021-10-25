@@ -118,9 +118,8 @@ func linearLinkedList() {
 
 // Array Stack
 func stackArray(){
-	myArrayStack := Stack.ArrayStack{}
-	myArrayStack.Constructor()
-	fmt.Println(myArrayStack.ArrSize)
+	myArrayStack := Stack.ArrayStack()
+	//myArrayStack.Constructor()
 	myArrayStack.Push(33)
 	myArrayStack.Push(55)
 	myArrayStack.Print()
@@ -130,13 +129,11 @@ func stackArray(){
 	myArrayStack.Print()
 	myArrayStack.Push(86)
 	myArrayStack.Print()
-	fmt.Println(myArrayStack.ArrSize)
 	myArrayStack.Pop()
 	myArrayStack.Print()
 	myArrayStack.Pop()
 	myArrayStack.Print()
 	myArrayStack.Pop()
 	myArrayStack.Print()
-	fmt.Println(myArrayStack.ArrSize)
 
 }
