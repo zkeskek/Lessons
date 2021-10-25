@@ -10,6 +10,7 @@ import (
 	"DataStructures/DoubleLinkedList"
 	"DataStructures/LinearLinkedList"
 	"DataStructures/Stack"
+	"DataStructures/Queue"
 	"fmt"
 
 )
@@ -29,7 +30,13 @@ func main() {
 	// stackArray()
 
 	// Linked List Stack
-	stackLinkedList()
+	// stackLinkedList()
+
+	// Array Queue
+	queueArray()
+
+	// Linked List Queue
+	// queueLinkedList()
 
 }
 
@@ -165,5 +172,60 @@ func stackLinkedList(){
 	myArrayStack.Print()
 	myArrayStack.Push(55)
 	myArrayStack.Push(66)
+	myArrayStack.Print()
+}
+
+// Array Queue
+func queueArray(){
+	myArrayStack := Queue.ArrayQueue()
+	myArrayStack.Enqueue(33)
+	myArrayStack.Enqueue(55)
+	myArrayStack.Print()
+	myArrayStack.Enqueue(65)
+	myArrayStack.Print()
+	myArrayStack.Enqueue(76)
+	myArrayStack.Print()
+	myArrayStack.Enqueue(86)
+	myArrayStack.Print()
+	myArrayStack.Dequeue()
+	myArrayStack.Print()
+	myArrayStack.Dequeue()
+	myArrayStack.Print()
+	myArrayStack.Dequeue()
+	myArrayStack.Print()
+	myArrayStack.Enqueue(33)
+	myArrayStack.Print()
+	myArrayStack.Dequeue()
+	myArrayStack.Print()
+	myArrayStack.Dequeue()
+	myArrayStack.Print()
+}
+
+// LinkedList Queue
+func queueLinkedList(){
+	myArrayStack := Queue.LinkedListQueue(22)
+	myArrayStack.Enqueue(33)
+	myArrayStack.Enqueue(55)
+	myArrayStack.Enqueue(66)
+	myArrayStack.Print()
+	myArrayStack.Enqueue(65)
+	myArrayStack.Print()
+	myArrayStack.Enqueue(76)
+	myArrayStack.Print()
+	myArrayStack.Enqueue(86)
+	myArrayStack.Print()
+	myArrayStack.Dequeue()
+	myArrayStack.Print()
+	myArrayStack.Dequeue()
+	myArrayStack.Print()
+	myArrayStack.Dequeue()
+	myArrayStack.Print()
+	myArrayStack.Dequeue()
+	myArrayStack.Dequeue()
+	myArrayStack.Dequeue()
+	myArrayStack.Dequeue()
+	myArrayStack.Print()
+	myArrayStack.Enqueue(55)
+	myArrayStack.Enqueue(66)
 	myArrayStack.Print()
 }
