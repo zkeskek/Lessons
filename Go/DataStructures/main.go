@@ -26,9 +26,10 @@ func main() {
 	// doubleLinkedList()
 
 	// Array Stack
-	stackArray()
+	// stackArray()
 
 	// Linked List Stack
+	stackLinkedList()
 
 }
 
@@ -136,4 +137,25 @@ func stackArray(){
 	myArrayStack.Pop()
 	myArrayStack.Print()
 
+}
+
+// LinkedList Stack
+func stackLinkedList(){
+	myArrayStack := Stack.LinkedListStack(22)
+	myArrayStack.Push(33)
+	myArrayStack.Push(55)
+	myArrayStack.Push(66)
+	myArrayStack.Print()
+	myArrayStack.Push(65)
+	myArrayStack.Print()
+	myArrayStack.Push(76)
+	myArrayStack.Print()
+	myArrayStack.Push(86)
+	myArrayStack.Print()
+	myArrayStack.Pop()
+	myArrayStack.Print()
+	myArrayStack.Pop()
+	myArrayStack.Print()
+	myArrayStack.Pop()
+	myArrayStack.Print()
 }
