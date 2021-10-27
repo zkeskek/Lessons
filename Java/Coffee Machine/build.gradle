@@ -1,18 +1,17 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-}
+apply plugin: 'hyperskill'
 
 subprojects {
     apply plugin: 'application'
     apply plugin: 'java'
 
-    sourceCompatibility = 11
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(hs.java.version))
+        }
+    }
 
     repositories {
         mavenCentral()
-
         maven { url "https://jitpack.io" }
     }
 
@@ -31,6 +30,7 @@ subprojects {
 
     test {
         systemProperty "file.encoding", "utf-8"
+        outputs.upToDateWhen { false }
     }
 
     compileJava.options.encoding = 'utf-8'
@@ -39,15 +39,6 @@ subprojects {
     }
 }
 
-project(':util') {
-    dependencies {
-        implementation 'com.github.hyperskill:hs-test:release-SNAPSHOT'
-    }
-}
-
-configure(subprojects.findAll { it.name != 'util' }) {
-    dependencies {
-        testImplementation project(':util').sourceSets.main.output
-        testImplementation project(':util').sourceSets.test.output
-    }
+wrapper {
+    gradleVersion = hs.gradle.version
 }
