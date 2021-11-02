@@ -1,48 +1,6 @@
 type: edu
 custom_name: stage6
 files:
-- name: src/machine/CoffeeMachine.java
-  visible: true
-  text: |
-    package machine;
-
-    import java.util.Scanner;
-
-    public class CoffeeMachine {
-        public static void main(String[] args) {
-            Scanner scanner = new Scanner(System.in);
-            int waterUnit = 200;
-            int milkUnit = 50;
-            int beanUnit = 15;
-
-            System.out.println("Write how many ml of water the coffee machine has: ");
-            int waterAmount = scanner.nextInt();
-
-            System.out.println("Write how many ml of milk the coffee machine has: ");
-            int milkAmount = scanner.nextInt();
-
-            System.out.println("Write how many grams of coffee beans the coffee machine has: ");
-            int beanAmount = scanner.nextInt();
-
-            System.out.println("Write how many cups of coffee you will need: ");
-            int coffeeCount = scanner.nextInt();
-
-            int available = waterAmount / waterUnit;
-            available = Math.min(available, milkAmount / milkUnit);
-            available = Math.min(available, beanAmount / beanUnit);
-
-            int diff = available - coffeeCount;
-
-            if (diff == 0) {
-                System.out.println("Yes, I can make that amount of coffee");
-            } else if (available > coffeeCount) {
-                System.out.println("Yes, I can make that amount of coffee (and even "+diff+" more than that)");
-            } else if (available > 0) {
-                System.out.println("No, I can make only "+available+" cup(s) of coffee");
-            }
-        }
-    }
-  learner_created: false
 - name: test/CoffeeMachineTest.java
   visible: false
   text: |
@@ -308,12 +266,54 @@ files:
         }
     }
   learner_created: false
-- name: src/machine/Machine.java
-  visible: true
-  learner_created: true
 - name: src/machine/OldMain.java
   visible: true
   learner_created: true
+- name: src/machine/Machine.java
+  visible: true
+  learner_created: true
+- name: src/machine/CoffeeMachine.java
+  visible: true
+  text: |
+    package machine;
+
+    import java.util.Scanner;
+
+    public class CoffeeMachine {
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+            int waterUnit = 200;
+            int milkUnit = 50;
+            int beanUnit = 15;
+
+            System.out.println("Write how many ml of water the coffee machine has: ");
+            int waterAmount = scanner.nextInt();
+
+            System.out.println("Write how many ml of milk the coffee machine has: ");
+            int milkAmount = scanner.nextInt();
+
+            System.out.println("Write how many grams of coffee beans the coffee machine has: ");
+            int beanAmount = scanner.nextInt();
+
+            System.out.println("Write how many cups of coffee you will need: ");
+            int coffeeCount = scanner.nextInt();
+
+            int available = waterAmount / waterUnit;
+            available = Math.min(available, milkAmount / milkUnit);
+            available = Math.min(available, beanAmount / beanUnit);
+
+            int diff = available - coffeeCount;
+
+            if (diff == 0) {
+                System.out.println("Yes, I can make that amount of coffee");
+            } else if (available > coffeeCount) {
+                System.out.println("Yes, I can make that amount of coffee (and even "+diff+" more than that)");
+            } else if (available > 0) {
+                System.out.println("No, I can make only "+available+" cup(s) of coffee");
+            }
+        }
+    }
+  learner_created: false
 feedback_link: https://hyperskill.org/projects/33/stages/180/implement#comment
 status: Solved
 feedback:
