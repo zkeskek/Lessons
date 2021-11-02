@@ -41,6 +41,7 @@ public class CinemaService {
         return purchaseRequestDto.getRow() > 9 || purchaseRequestDto.getColumn() > 9 || purchaseRequestDto.getRow() < 1 || purchaseRequestDto.getColumn() < 1;
     }
 
+    // purchase
     public ResponseEntity<Response> purchase(PurchaseRequestDto purchaseRequestDto, CinemaModel cinemaModel){
 
         if(this.isOutOfBounds(purchaseRequestDto)){
@@ -56,6 +57,7 @@ public class CinemaService {
         return ResponseEntity.badRequest().body(new ResponseError("The ticket has been already purchased!"));
     }
 
+    // returns
     public ResponseEntity<Response> returns(ReturnRequestDto returnRequestDto, CinemaModel cinemaModel){
         for (AvailableModel availableModel : cinemaModel.getAvailableSeats()){
             if(availableModel.getToken().equals(returnRequestDto.getToken()) && availableModel.getReserved()){
@@ -64,5 +66,27 @@ public class CinemaService {
             }
         }
         return ResponseEntity.badRequest().body(new ResponseError("Wrong token!"));
+    }
+
+    // stats
+    public ResponseEntity<Response> stats(StatsRequestDto statsRequestDto, CinemaModel cinemaModel){
+        try {
+            if(statsRequestDto.getPassword().equals("super_secret")){
+                int currentIncome = 0;
+                int numberOfAvailableSeats = 0;
+                int numberOfPurchasedTickets = 0;
+
+                for(AvailableModel availableModel : cinemaModel.getAvailableSeats()){
+                    if(availableModel.getReserved()){
+                        numberOfPurchasedTickets++;
+                        currentIncome += availableModel.getPrice();
+                    }else{
+                        numberOfAvailableSeats++;
+                    }
+                }
+                return ResponseEntity.ok(new ResponseStats(currentIncome, numberOfAvailableSeats, numberOfPurchasedTickets));
+            }
+        }catch (Exception exception){ }
+        return ResponseEntity.status(401).body(new ResponseError("The password is wrong!"));
     }
 }

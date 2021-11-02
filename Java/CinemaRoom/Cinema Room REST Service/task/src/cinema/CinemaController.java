@@ -1,5 +1,6 @@
 package cinema;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,12 @@ public class CinemaController {
     @PostMapping("/return")
     public ResponseEntity<Response> returns(@RequestBody ReturnRequestDto returnRequestDto){
         return cinemaService.returns(returnRequestDto, cinemaModel);
+    }
+
+    //@PostMapping(value = "/stats")
+    @RequestMapping(value = "/stats", method = RequestMethod.POST, consumes = MediaType.ALL_VALUE)
+    public ResponseEntity<Response> stats(StatsRequestDto statsRequestDto){
+        return cinemaService.stats(statsRequestDto, cinemaModel);
     }
 
 }
