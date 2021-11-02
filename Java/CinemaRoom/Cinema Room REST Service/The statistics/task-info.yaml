@@ -390,6 +390,389 @@ files:
         };
     }
   learner_created: false
+- name: src/cinema/PurchaseRequestDto.java
+  visible: true
+  text: |
+    package cinema;
+
+    public class PurchaseRequestDto {
+
+        private int row;
+        private int column;
+
+        public PurchaseRequestDto() {
+        }
+
+        public PurchaseRequestDto(int row, int column) {
+            this.row = row;
+            this.column = column;
+        }
+
+        public int getRow() {
+            return row;
+        }
+
+        public int getColumn() {
+            return column;
+        }
+
+        public void setRow(int row) {
+            this.row = row;
+        }
+
+        public void setColumn(int column) {
+            this.column = column;
+        }
+    }
+  learner_created: true
+- name: src/cinema/ResponseReturn.java
+  visible: true
+  text: |
+    package cinema;
+
+    import java.util.HashMap;
+    import java.util.Map;
+
+    public class ResponseReturn implements Response{
+
+        private Map<String, Integer> returnedTicket;
+
+        public ResponseReturn(AvailableModel availableModel) {
+            this.returnedTicket = new HashMap<>();
+            this.returnedTicket.put("row", availableModel.getRow());
+            this.returnedTicket.put("column", availableModel.getColumn());
+            this.returnedTicket.put("price", availableModel.getPrice());
+        }
+
+        public Map<String, Integer> getReturnedTicket() {
+            return returnedTicket;
+        }
+
+        public void setReturnedTicket(Map<String, Integer> returnedTicket) {
+            this.returnedTicket = returnedTicket;
+        }
+    }
+  learner_created: true
+- name: src/cinema/CinemaModel.java
+  visible: true
+  text: |
+    package cinema;
+    import java.util.ArrayList;
+    import java.util.List;
+
+    public class CinemaModel {
+
+        private int totalRows;
+        private int totalColumns;
+        private List<AvailableModel> availableSeats;
+
+        public CinemaModel() {
+            this.availableSeats = new ArrayList<>();
+        }
+
+        public int getTotalRows() {
+            return totalRows;
+        }
+
+        public void setTotalRows(int totalRows) {
+            this.totalRows = totalRows;
+        }
+
+        public int getTotalColumns() {
+            return totalColumns;
+        }
+
+        public void setTotalColumns(int totalColumns) {
+            this.totalColumns = totalColumns;
+        }
+
+        public List<AvailableModel> getAvailableSeats() {
+            return availableSeats;
+        }
+
+        public void setAvailableSeats(AvailableModel availableSeats) {
+            this.availableSeats.add(availableSeats);
+        }
+
+        public void setAvailableSeats(List<AvailableModel> availableSeats) {
+            this.availableSeats = availableSeats;
+        }
+    }
+  learner_created: true
+- name: src/cinema/ResponseError.java
+  visible: true
+  text: |
+    package cinema;
+
+    public class ResponseError implements  Response{
+
+        private String error;
+
+        public ResponseError(String error) {
+            this.error = error;
+        }
+
+        public String getError() {
+            return error;
+        }
+
+        public void setError(String error) {
+            this.error = error;
+        }
+    }
+  learner_created: true
+- name: src/cinema/CinemaController.java
+  visible: true
+  text: |
+    package cinema;
+
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.web.bind.annotation.*;
+
+    import java.util.UUID;
+
+    @RestController
+    @RequestMapping
+    public class CinemaController {
+
+        CinemaService cinemaService = new CinemaService();
+        CinemaModel cinemaModel = cinemaService.initializeSeats();
+
+        @GetMapping
+        public ResponseEntity<String> index(){
+            return  ResponseEntity.ok("Hello Cinema Task.");
+        }
+
+        @GetMapping("/seats")
+        public ResponseEntity<CinemaModel> seats(){
+            return ResponseEntity.ok(cinemaService.getSeats(cinemaModel));
+        }
+
+        @PostMapping("/purchase")
+        public ResponseEntity<Response> purchase(@RequestBody PurchaseRequestDto purchaseRequestDto){
+            return cinemaService.purchase(purchaseRequestDto, cinemaModel);
+        }
+
+        @PostMapping("/return")
+        public ResponseEntity<Response> returns(@RequestBody ReturnRequestDto returnRequestDto){
+            return cinemaService.returns(returnRequestDto, cinemaModel);
+        }
+
+    }
+  learner_created: true
+- name: src/cinema/Response.java
+  visible: true
+  text: |
+    package cinema;
+
+    public interface Response {
+    }
+  learner_created: true
+- name: src/cinema/CinemaService.java
+  visible: true
+  text: |
+    package cinema;
+
+    import org.springframework.http.ResponseEntity;
+
+    import java.util.ArrayList;
+    import java.util.List;
+    import java.util.UUID;
+
+    public class CinemaService {
+
+        // initialize
+        public CinemaModel initializeSeats(){
+            CinemaModel cinemaModel = new CinemaModel();
+
+            cinemaModel.setTotalRows(9);
+            cinemaModel.setTotalColumns(9);
+
+            for (int i = 1; i < 10; i++) {
+                for (int j = 1; j < 10; j++) {
+                    cinemaModel.setAvailableSeats(new AvailableModel(i,j));
+                }
+            }
+            return  cinemaModel;
+        }
+
+        public CinemaModel getSeats(CinemaModel cinemaModel){
+
+            List<AvailableModel> newAvailableModel = new ArrayList<>();
+
+            for (AvailableModel availableModel : cinemaModel.getAvailableSeats()){
+                if (!availableModel.getReserved()){
+                    newAvailableModel.add(new AvailableModel(availableModel.getRow(), availableModel.getColumn()));
+                }
+            }
+            cinemaModel.setAvailableSeats(newAvailableModel);
+            return  cinemaModel;
+        }
+
+        // Out Of Bound Control
+        public boolean isOutOfBounds(PurchaseRequestDto purchaseRequestDto){
+            return purchaseRequestDto.getRow() > 9 || purchaseRequestDto.getColumn() > 9 || purchaseRequestDto.getRow() < 1 || purchaseRequestDto.getColumn() < 1;
+        }
+
+        public ResponseEntity<Response> purchase(PurchaseRequestDto purchaseRequestDto, CinemaModel cinemaModel){
+
+            if(this.isOutOfBounds(purchaseRequestDto)){
+                return ResponseEntity.badRequest().body(new ResponseError("The number of a row or a column is out of bounds!"));
+            }
+
+            for (AvailableModel availableModel : cinemaModel.getAvailableSeats()){
+                if(availableModel.getColumn() == purchaseRequestDto.getColumn() && availableModel.getRow() == purchaseRequestDto.getRow() && !availableModel.getReserved()){
+                    availableModel.setReserved(true);
+                    return ResponseEntity.ok(new ResponsePurchase(availableModel));
+                }
+            }
+            return ResponseEntity.badRequest().body(new ResponseError("The ticket has been already purchased!"));
+        }
+
+        public ResponseEntity<Response> returns(ReturnRequestDto returnRequestDto, CinemaModel cinemaModel){
+            for (AvailableModel availableModel : cinemaModel.getAvailableSeats()){
+                if(availableModel.getToken().equals(returnRequestDto.getToken()) && availableModel.getReserved()){
+                    availableModel.setReserved(false);
+                    return ResponseEntity.ok(new ResponseReturn(availableModel));
+                }
+            }
+            return ResponseEntity.badRequest().body(new ResponseError("Wrong token!"));
+        }
+    }
+  learner_created: true
+- name: src/cinema/ResponsePurchase.java
+  visible: true
+  text: |
+    package cinema;
+
+    import java.util.HashMap;
+    import java.util.Map;
+    import java.util.UUID;
+
+    public class ResponsePurchase implements  Response{
+
+        private UUID token;
+        private Map<String,Integer> ticket;
+
+        public ResponsePurchase(AvailableModel availableModel) {
+            this.token = availableModel.getToken();
+            this.ticket = new HashMap<>();
+            this.ticket.put("row", availableModel.getRow());
+            this.ticket.put("column", availableModel.getColumn());
+            this.ticket.put("price", availableModel.getPrice());
+        }
+
+        public UUID getToken() {
+            return token;
+        }
+
+        public void setToken(UUID token) {
+            this.token = token;
+        }
+
+        public Map<String, Integer> getTicket() {
+            return ticket;
+        }
+
+        public void setTicket(Map<String, Integer> ticket) {
+            this.ticket = ticket;
+        }
+    }
+  learner_created: true
+- name: src/cinema/ReturnRequestDto.java
+  visible: true
+  text: |
+    package cinema;
+
+    import java.util.UUID;
+
+    public class ReturnRequestDto {
+
+        private UUID token;
+
+        public ReturnRequestDto() {
+        }
+
+        public ReturnRequestDto(UUID token) {
+            this.token = token;
+        }
+
+        public UUID getToken() {
+            return token;
+        }
+
+        public void setToken(UUID token) {
+            this.token = token;
+        }
+    }
+  learner_created: true
+- name: src/cinema/AvailableModel.java
+  visible: true
+  text: |
+    package cinema;
+
+    import com.fasterxml.jackson.annotation.JsonIgnore;
+
+    import java.util.UUID;
+
+    public class AvailableModel {
+        private int row;
+        private int column;
+        private int price;
+        @JsonIgnore
+        private boolean reserved;
+        @JsonIgnore
+        private final UUID token;
+
+        public AvailableModel(int row, int column) {
+            this.row = row;
+            this.column = column;
+            this.price = 8;
+            if (row <= 4){
+                this.price = 10;
+            }
+            this.reserved = false;
+            this.token = UUID.randomUUID();
+        }
+
+        public int getRow() {
+            return row;
+        }
+
+        public void setRow(int row) {
+            this.row = row;
+        }
+
+        public int getColumn() {
+            return column;
+        }
+
+        public void setColumn(int column) {
+            this.column = column;
+        }
+
+        public int getPrice() {
+            return price;
+        }
+
+        public void setPrice(int price) {
+            this.price = price;
+        }
+
+        public boolean getReserved() {
+            return reserved;
+        }
+
+        public void setReserved(boolean reserve) {
+            reserved = reserve;
+        }
+
+        public UUID getToken() {
+            return token;
+        }
+
+    }
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/189/stages/948/implement#comment
 status: Unchecked
 record: -1

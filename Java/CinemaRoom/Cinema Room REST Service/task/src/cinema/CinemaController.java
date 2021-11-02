@@ -3,6 +3,8 @@ package cinema;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping
 public class CinemaController {
@@ -21,8 +23,13 @@ public class CinemaController {
     }
 
     @PostMapping("/purchase")
-    public ResponseEntity<Response> purchase(@RequestBody AvailableDto availableDto){
-        return cinemaService.purchase(availableDto, cinemaModel);
+    public ResponseEntity<Response> purchase(@RequestBody PurchaseRequestDto purchaseRequestDto){
+        return cinemaService.purchase(purchaseRequestDto, cinemaModel);
+    }
+
+    @PostMapping("/return")
+    public ResponseEntity<Response> returns(@RequestBody ReturnRequestDto returnRequestDto){
+        return cinemaService.returns(returnRequestDto, cinemaModel);
     }
 
 }

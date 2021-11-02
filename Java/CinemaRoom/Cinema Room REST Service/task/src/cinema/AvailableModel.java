@@ -1,7 +1,8 @@
 package cinema;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.UUID;
 
 public class AvailableModel {
     private int row;
@@ -9,6 +10,8 @@ public class AvailableModel {
     private int price;
     @JsonIgnore
     private boolean reserved;
+    @JsonIgnore
+    private final UUID token;
 
     public AvailableModel(int row, int column) {
         this.row = row;
@@ -18,6 +21,7 @@ public class AvailableModel {
             this.price = 10;
         }
         this.reserved = false;
+        this.token = UUID.randomUUID();
     }
 
     public int getRow() {
@@ -51,4 +55,9 @@ public class AvailableModel {
     public void setReserved(boolean reserve) {
         reserved = reserve;
     }
+
+    public UUID getToken() {
+        return token;
+    }
+
 }

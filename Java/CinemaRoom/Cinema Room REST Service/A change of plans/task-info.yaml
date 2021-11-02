@@ -297,6 +297,320 @@ files:
         };
     }
   learner_created: false
+- name: src/cinema/CinemaService.java
+  visible: true
+  text: |
+    package cinema;
+
+    import org.springframework.http.HttpStatus;
+    import org.springframework.http.ResponseEntity;
+
+    import java.util.ArrayList;
+    import java.util.List;
+
+    public class CinemaService {
+
+        // initialize
+        public CinemaModel initializeSeats(){
+            CinemaModel cinemaModel = new CinemaModel();
+
+            cinemaModel.setTotalRows(9);
+            cinemaModel.setTotalColumns(9);
+
+            for (int i = 1; i < 10; i++) {
+                for (int j = 1; j < 10; j++) {
+                    cinemaModel.setAvailableSeats(new AvailableModel(i,j));
+                }
+            }
+            return  cinemaModel;
+        }
+
+        public CinemaModel getSeats(CinemaModel cinemaModel){
+
+            List<AvailableModel> newAvailableModel = new ArrayList<>();
+
+            for (AvailableModel availableModel : cinemaModel.getAvailableSeats()){
+                if (!availableModel.getReserved()){
+                    newAvailableModel.add(new AvailableModel(availableModel.getRow(), availableModel.getColumn()));
+                }
+            }
+            cinemaModel.setAvailableSeats(newAvailableModel);
+            return  cinemaModel;
+        }
+
+        // Out Of Bound Control
+        public boolean isOutOfBounds(AvailableDto availableDto){
+            return availableDto.getRow() > 9 || availableDto.getColumn() > 9 || availableDto.getRow() < 1 || availableDto.getColumn() < 1;
+        }
+
+        public ResponseEntity<Response> purchase(AvailableDto availableDto, CinemaModel cinemaModel){
+
+            if(this.isOutOfBounds(availableDto)){
+                return ResponseEntity.badRequest().body(new ResponseError("The number of a row or a column is out of bounds!"));
+            }
+
+            for (AvailableModel availableModel : cinemaModel.getAvailableSeats()){
+                if(availableModel.getColumn() == availableDto.getColumn() && availableModel.getRow() == availableDto.getRow() && !availableModel.getReserved()){
+                    availableModel.setReserved(true);
+                    return ResponseEntity.ok(new ResponsePurchase(availableDto.getRow(),availableDto.getColumn(),availableModel.getPrice()));
+                }
+            }
+            return ResponseEntity.badRequest().body(new ResponseError("The ticket has been already purchased!"));
+        }
+    }
+  learner_created: true
+- name: src/cinema/ResponsePurchase.java
+  visible: true
+  text: |
+    package cinema;
+
+    public class ResponsePurchase implements  Response{
+
+        private int row;
+        private int column;
+        private int price;
+
+        public ResponsePurchase(int row, int column, int price) {
+            this.row = row;
+            this.column = column;
+            this.price = price;
+        }
+
+        public int getRow() {
+            return row;
+        }
+
+        public void setRow(int row) {
+            this.row = row;
+        }
+
+        public int getColumn() {
+            return column;
+        }
+
+        public void setColumn(int column) {
+            this.column = column;
+        }
+
+        public int getPrice() {
+            return price;
+        }
+
+        public void setPrice(int price) {
+            this.price = price;
+        }
+    }
+  learner_created: true
+- name: src/cinema/CinemaModel.java
+  visible: true
+  text: |
+    package cinema;
+    import java.util.ArrayList;
+    import java.util.List;
+
+    public class CinemaModel {
+
+        private int totalRows;
+        private int totalColumns;
+        private List<AvailableModel> availableSeats;
+
+        public CinemaModel() {
+            this.availableSeats = new ArrayList<>();
+        }
+
+        public int getTotalRows() {
+            return totalRows;
+        }
+
+        public void setTotalRows(int totalRows) {
+            this.totalRows = totalRows;
+        }
+
+        public int getTotalColumns() {
+            return totalColumns;
+        }
+
+        public void setTotalColumns(int totalColumns) {
+            this.totalColumns = totalColumns;
+        }
+
+        public List<AvailableModel> getAvailableSeats() {
+            return availableSeats;
+        }
+
+        public void setAvailableSeats(AvailableModel availableSeats) {
+            this.availableSeats.add(availableSeats);
+        }
+
+        public void setAvailableSeats(List<AvailableModel> availableSeats) {
+            this.availableSeats = availableSeats;
+        }
+    }
+  learner_created: true
+- name: src/cinema/ResponseError.java
+  visible: true
+  text: |
+    package cinema;
+
+    public class ResponseError implements  Response{
+
+        private String error;
+
+        public ResponseError(String error) {
+            this.error = error;
+        }
+
+        public String getError() {
+            return error;
+        }
+
+        public void setError(String error) {
+            this.error = error;
+        }
+    }
+  learner_created: true
+- name: src/cinema/AvailableModel.java
+  visible: true
+  text: |
+    package cinema;
+
+    import com.fasterxml.jackson.annotation.JsonIgnore;
+    import com.fasterxml.jackson.annotation.JsonProperty;
+
+    public class AvailableModel {
+        private int row;
+        private int column;
+        private int price;
+        @JsonIgnore
+        private boolean reserved;
+
+        public AvailableModel(int row, int column) {
+            this.row = row;
+            this.column = column;
+            this.price = 8;
+            if (row <= 4){
+                this.price = 10;
+            }
+            this.reserved = false;
+        }
+
+        public int getRow() {
+            return row;
+        }
+
+        public void setRow(int row) {
+            this.row = row;
+        }
+
+        public int getColumn() {
+            return column;
+        }
+
+        public void setColumn(int column) {
+            this.column = column;
+        }
+
+        public int getPrice() {
+            return price;
+        }
+
+        public void setPrice(int price) {
+            this.price = price;
+        }
+
+        public boolean getReserved() {
+            return reserved;
+        }
+
+        public void setReserved(boolean reserve) {
+            reserved = reserve;
+        }
+    }
+  learner_created: true
+- name: src/cinema/CinemaController.java
+  visible: true
+  text: |
+    package cinema;
+
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.web.bind.annotation.*;
+
+    @RestController
+    @RequestMapping
+    public class CinemaController {
+
+        CinemaService cinemaService = new CinemaService();
+        CinemaModel cinemaModel = cinemaService.initializeSeats();
+
+        @GetMapping
+        public ResponseEntity<String> index(){
+            return  ResponseEntity.ok("Hello Cinema Task.");
+        }
+
+        @GetMapping("/seats")
+        public ResponseEntity<CinemaModel> seats(){
+            return ResponseEntity.ok(cinemaService.getSeats(cinemaModel));
+        }
+
+        @PostMapping("/purchase")
+        public ResponseEntity<Response> purchase(@RequestBody AvailableDto availableDto){
+            return cinemaService.purchase(availableDto, cinemaModel);
+        }
+
+    }
+  learner_created: true
+- name: src/cinema/Response.java
+  visible: true
+  text: |
+    package cinema;
+
+    public interface Response {
+    }
+  learner_created: true
+- name: src/cinema/PurchaseRequestDto.java
+  visible: true
+  text: |
+    package cinema;
+
+    public class AvailableDto {
+
+        private int row;
+        private int column;
+
+        public AvailableDto() {
+        }
+
+        public AvailableDto(int row, int column) {
+            this.row = row;
+            this.column = column;
+        }
+
+        public int getRow() {
+            return row;
+        }
+
+        public int getColumn() {
+            return column;
+        }
+
+        public void setRow(int row) {
+            this.row = row;
+        }
+
+        public void setColumn(int column) {
+            this.column = column;
+        }
+    }
+  learner_created: true
+- name: src/cinema/ResponseReturn.java
+  visible: true
+  learner_created: true
+- name: src/cinema/ReturnRequestDto.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/189/stages/947/implement#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Tue, 02 Nov 2021 09:25:29 UTC
+record: 3

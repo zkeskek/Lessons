@@ -1,38 +1,35 @@
 package cinema;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public class ResponsePurchase implements  Response{
 
-    private int row;
-    private int column;
-    private int price;
+    private UUID token;
+    private Map<String,Integer> ticket;
 
-    public ResponsePurchase(int row, int column, int price) {
-        this.row = row;
-        this.column = column;
-        this.price = price;
+    public ResponsePurchase(AvailableModel availableModel) {
+        this.token = availableModel.getToken();
+        this.ticket = new HashMap<>();
+        this.ticket.put("row", availableModel.getRow());
+        this.ticket.put("column", availableModel.getColumn());
+        this.ticket.put("price", availableModel.getPrice());
     }
 
-    public int getRow() {
-        return row;
+    public UUID getToken() {
+        return token;
     }
 
-    public void setRow(int row) {
-        this.row = row;
+    public void setToken(UUID token) {
+        this.token = token;
     }
 
-    public int getColumn() {
-        return column;
+    public Map<String, Integer> getTicket() {
+        return ticket;
     }
 
-    public void setColumn(int column) {
-        this.column = column;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
+    public void setTicket(Map<String, Integer> ticket) {
+        this.ticket = ticket;
     }
 }

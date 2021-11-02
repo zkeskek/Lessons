@@ -1,10 +1,10 @@
 package cinema;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class CinemaService {
 
@@ -37,22 +37,32 @@ public class CinemaService {
     }
 
     // Out Of Bound Control
-    public boolean isOutOfBounds(AvailableDto availableDto){
-        return availableDto.getRow() > 9 || availableDto.getColumn() > 9 || availableDto.getRow() < 1 || availableDto.getColumn() < 1;
+    public boolean isOutOfBounds(PurchaseRequestDto purchaseRequestDto){
+        return purchaseRequestDto.getRow() > 9 || purchaseRequestDto.getColumn() > 9 || purchaseRequestDto.getRow() < 1 || purchaseRequestDto.getColumn() < 1;
     }
 
-    public ResponseEntity<Response> purchase(AvailableDto availableDto, CinemaModel cinemaModel){
+    public ResponseEntity<Response> purchase(PurchaseRequestDto purchaseRequestDto, CinemaModel cinemaModel){
 
-        if(this.isOutOfBounds(availableDto)){
+        if(this.isOutOfBounds(purchaseRequestDto)){
             return ResponseEntity.badRequest().body(new ResponseError("The number of a row or a column is out of bounds!"));
         }
 
         for (AvailableModel availableModel : cinemaModel.getAvailableSeats()){
-            if(availableModel.getColumn() == availableDto.getColumn() && availableModel.getRow() == availableDto.getRow() && !availableModel.getReserved()){
+            if(availableModel.getColumn() == purchaseRequestDto.getColumn() && availableModel.getRow() == purchaseRequestDto.getRow() && !availableModel.getReserved()){
                 availableModel.setReserved(true);
-                return ResponseEntity.ok(new ResponsePurchase(availableDto.getRow(),availableDto.getColumn(),availableModel.getPrice()));
+                return ResponseEntity.ok(new ResponsePurchase(availableModel));
             }
         }
         return ResponseEntity.badRequest().body(new ResponseError("The ticket has been already purchased!"));
+    }
+
+    public ResponseEntity<Response> returns(ReturnRequestDto returnRequestDto, CinemaModel cinemaModel){
+        for (AvailableModel availableModel : cinemaModel.getAvailableSeats()){
+            if(availableModel.getToken().equals(returnRequestDto.getToken()) && availableModel.getReserved()){
+                availableModel.setReserved(false);
+                return ResponseEntity.ok(new ResponseReturn(availableModel));
+            }
+        }
+        return ResponseEntity.badRequest().body(new ResponseError("Wrong token!"));
     }
 }

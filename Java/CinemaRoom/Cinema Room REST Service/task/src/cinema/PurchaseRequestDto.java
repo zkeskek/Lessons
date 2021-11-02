@@ -1,14 +1,14 @@
 package cinema;
 
-public class AvailableDto {
+public class PurchaseRequestDto {
 
     private int row;
     private int column;
 
-    public AvailableDto() {
+    public PurchaseRequestDto() {
     }
 
-    public AvailableDto(int row, int column) {
+    public PurchaseRequestDto(int row, int column) {
         this.row = row;
         this.column = column;
     }
