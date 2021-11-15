@@ -1,12 +1,11 @@
-.navbar {
+.navbarbg {
   height: 55px;
   position: fixed !important;
-  background-color: white !important;
   width: 100%;
   z-index: 100;
 }
 .container {
-  padding-top: 55px;
+  padding-top: 65px;
 }
 
 input.searche {
