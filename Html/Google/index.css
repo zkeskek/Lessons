@@ -1,0 +1,43 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+ul {
+  list-style: none;
+}
+.clear {
+  clear: both;
+}
+#logo {
+  margin-bottom: 40px;
+}
+section#search {
+  padding: 20px;
+  background-color: rgb(231, 231, 231);
+}
+section#search input {
+  margin-bottom: 10px;
+}
+input[name="q"] {
+  width: 500px;
+  padding: 8px;
+}
+section#content {
+  margin-top: 5px;
+  display: flex;
+  background-color: rgb(100, 216, 237);
+}
+section#content div {
+  float: left;
+}
+#left {
+  width: 30%;
+  border-right: solid 2px #ddd;
+}
+#middle {
+  width: 40%;
+  border-right: solid 2px #ddd;
+}
+#right {
+  width: 30%;
+}
