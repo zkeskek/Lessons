@@ -1,0 +1,36 @@
+body {
+  background-color: bisque;
+  font-family: "Courier New", Courier, monospace;
+}
+header {
+  padding: 20px;
+}
+
+header ul li {
+  float: left;
+  display: block;
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+header ul li a:hover {
+  color: red;
+}
+
+section {
+  padding: 50px;
+}
+article {
+  margin-bottom: 50px;
+}
+
+footer ul li {
+  float: left;
+  display: block;
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+footer ul li a:hover {
+  color: red;
+}
