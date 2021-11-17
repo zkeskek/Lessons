@@ -48,10 +48,11 @@ func (node *Node) AddToBetween(data int, which int) {
 
 // AddToEnd Sonuna Ekle Methodu
 func (node *Node) AddToEnd(data int) {
-	for node.Next == nil {
-		node.Next = &Node{X: data, Next: nil}
-		break
+	iter := node
+	for iter.Next != nil {
+		iter = iter.Next
 	}
+	iter.Next = &Node{X: data, Next: nil}
 }
 
 // Delete Eleman Sil Methodu

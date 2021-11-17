@@ -19,7 +19,7 @@ import (
 func main() {
 
 	// Linear Linked List, Her node bir sonraki node objesinin referansını tutar.
-	// linearLinkedList()
+	linearLinkedList()
 
 	// Circular Linked List, Son node'un next'i root node'unu gösterir.
 	// circularLinkedList()
@@ -40,7 +40,7 @@ func main() {
 	// queueLinkedList()
 
 	// Binary Tree
-	binaryTree()
+	// binaryTree()
 
 }
 
@@ -113,6 +113,8 @@ func linearLinkedList() {
 	myLinearLinkedList := LinearLinkedList.Node{X: 23, Next: nil}
 
 	myLinearLinkedList.AddToEnd(21)
+	myLinearLinkedList.AddToEnd(33)
+	myLinearLinkedList.AddToEnd(44)
 
 	myLinearLinkedList.AddToStart(3)
 
