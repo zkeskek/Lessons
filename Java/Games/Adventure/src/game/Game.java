@@ -16,11 +16,11 @@ public class Game {
         // initialize
         this.initialize();
         // choose character
-        this.chooseCharacter();
+        //this.chooseCharacter();
         // choose weapon
-        this.chooseWeapon();
+        //this.chooseWeapon();
         // choose armor
-        this.chooseArmor();
+        //this.chooseArmor();
 
     }
 

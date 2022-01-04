@@ -9,4 +9,9 @@ public class Forest extends BattleLocation {
         super(player, name);
     }
 
+    @Override
+    public boolean onLocation() {
+        return false;
+    }
+
 }

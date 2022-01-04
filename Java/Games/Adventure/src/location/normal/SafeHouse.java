@@ -11,6 +11,8 @@ public class SafeHouse extends NormalLocation {
 
     @Override
     public boolean onLocation() {
-        return super.onLocation();
+        return false;
     }
+
+
 }

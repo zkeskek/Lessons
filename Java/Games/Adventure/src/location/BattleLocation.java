@@ -8,8 +8,5 @@ public abstract class BattleLocation extends Location {
         super(player, name);
     }
 
-    @Override
-    public boolean onLocation() {
-        return false;
-    }
+
  }

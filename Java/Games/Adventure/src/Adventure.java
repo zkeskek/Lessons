@@ -5,8 +5,9 @@ public class Adventure {
     public static void main(String[] args) {
 
         // Start game.Game
-        Game game = new Game();
-        game.start();
+        //Game game = new Game();
+        //game.start();
+
 
         /**
          *      STEPS

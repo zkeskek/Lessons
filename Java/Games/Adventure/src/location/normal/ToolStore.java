@@ -11,14 +11,8 @@ public class ToolStore extends NormalLocation {
 
     @Override
     public boolean onLocation() {
-        return super.onLocation();
+        return false;
     }
 
-    public void menu(){
 
-    }
-
-    public void buy(){
-
-    }
 }
