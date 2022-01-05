@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  server:
+    container_name: "flask-server"
+    build: ./server
+    volumes:
+      - ./server:/usr/src/app
+    ports:
+      - 5001:80
+
+  client:
+    container_name: "php-client"
+    image: php:apache
+    volumes:
+      - ./client:/var/www/html
+    ports:
+      - 5005:80
+    depends_on:
+      - server
