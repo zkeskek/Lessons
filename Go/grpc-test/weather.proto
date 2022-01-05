@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package test;
+
+option go_package = "grpc-test/api";
+
+service WeatherService{
+  rpc QueryWeather(WeatherRequest) returns (stream WeatherResponse);
+  rpc ListCities(ListCitiesRequest) returns (ListCitiesResponse);
+}
+
+// Weather
+message WeatherRequest{
+  string city_code = 1;
+}
+
+message  WeatherResponse{
+  float temperature = 1;
+}
+
+// Cities
+message ListCitiesRequest{}
+
+message ListCitiesResponse{
+  repeated CityEntry items = 1;
+}
+
+message CityEntry{
+  string city_code = 1;
+  string city_name = 2;
+}
