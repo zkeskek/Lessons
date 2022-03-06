@@ -10,7 +10,7 @@ func main() {
 	// declare sample strings
 	s := "the quick brown fox jumped over the lazy dog"
 	s2 := []string{"one", "two", "three", "four"}
-	s3 := "This is a string. With some punctionation, for a demo! Yep."
+	s3 := "This is a string. With some punctuation, for a demo! Yep."
 
 	// The Split function splits a string into substrings
 	sub1 := strings.Split(s, " ")
