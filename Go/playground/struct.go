@@ -38,6 +38,8 @@ func main(){
 	add1 := address{"home address", "work address"}
 
 	e3.address = add1
+	e3.firstname = "captain jack"
+	e3.lastname = "sparrow"
 
 	e4 := e1 // struct pass by value
 	e4.age = 35
