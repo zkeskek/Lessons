@@ -3,6 +3,9 @@ package main
 import (
 	"fmt"
 	"strings"
+
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 func main() {
@@ -46,8 +49,8 @@ func main() {
 	fmt.Println("\nToUpper, ToLower, Title")
 	s1 := strings.ToUpper(s)
 	s2 := strings.ToLower(s)
-	s3 := strings.Title(s)
-	fmt.Println(s1)
-	fmt.Println(s2)
-	fmt.Println(s3)
+	s3 := cases.Title(language.Turkish).String(s)
+	fmt.Println("s1", s1)
+	fmt.Println("s2", s2)
+	fmt.Println("s3", s3)
 }

@@ -8,14 +8,30 @@ import (
 
 func main() {
 	// create a directory
-	os.Mkdir("newdir", os.ModePerm)
+	err := os.Mkdir("newdir", os.ModePerm)
+	if err != nil {
+		return
+	}
 	// Remove will remove an item
-	defer os.Remove("newdir")
+	defer func() {
+		err = os.Remove("newdir")
+		if err != nil {
+			return
+		}
+	}()
 
 	// create a deep directory
-	os.MkdirAll("path/to/new/dir", os.ModePerm)
+	err = os.MkdirAll("path/to/new/dir", os.ModePerm)
+	if err != nil {
+		return
+	}
 	// RemoveAll will remove an item and all children
-	defer os.RemoveAll("path")
+	defer func() {
+		err = os.RemoveAll("path")
+		if err != nil {
+			return
+		}
+	}()
 
 	// get the current working directory
 	dir, _ := os.Getwd()

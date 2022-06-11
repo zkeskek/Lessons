@@ -31,7 +31,10 @@ func decodeExample() {
 	if valid {
 		// the Unmarhsal function decodes the JSON data into
 		// the provided data structure
-		json.Unmarshal(data, &p)
+		err := json.Unmarshal(data, &p)
+		if err != nil {
+			return
+		}
 		fmt.Printf("%#v\n", p)
 	}
 
@@ -39,7 +42,10 @@ func decodeExample() {
 	var m map[string]interface{}
 
 	// Unmarshal into a map
-	json.Unmarshal(data, &m)
+	err := json.Unmarshal(data, &m)
+	if err != nil {
+		return
+	}
 	fmt.Printf("%#v\n", m)
 	for k, v := range m {
 		fmt.Printf("key (%v), value (%T : %v)\n", k, v, v)

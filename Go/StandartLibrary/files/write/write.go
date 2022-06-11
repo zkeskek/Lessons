@@ -27,27 +27,46 @@ func writeFileData() {
 	handleErr(err)
 
 	// it is idiomatic in Go to defer the close after you open the file
-	defer f.Close()
+	defer func(f *os.File) {
+		err = f.Close()
+		if err != nil {
+			return
+		}
+	}(f)
 
 	// get the Name of the file
 	fmt.Println("The file is named ", f.Name())
 
 	// write some string data to the file
-	f.WriteString("This is a some text\n")
+	_, err = f.WriteString("This is a some text\n")
+	if err != nil {
+		return
+	}
 
 	// write some individual bytes to the file
 	data2 := []byte{'a', 'b', 'c', '\n'}
-	f.Write(data2)
+	_, err = f.Write(data2)
+	if err != nil {
+		return
+	}
 
 	// the Sync function forces the data to be written out
-	f.Sync()
+	err = f.Sync()
+	if err != nil {
+		return
+	}
 }
 
 func appendFileData(fname string, data string) {
 	// Use the lower-level OpenFile function to open the file in append mode
 	f, err := os.OpenFile(fname, os.O_APPEND|os.O_WRONLY, 0644)
 	handleErr(err)
-	defer f.Close()
+	defer func(f *os.File) {
+		err = f.Close()
+		if err != nil {
+			return
+		}
+	}(f)
 
 	_, err = f.WriteString(data)
 	handleErr(err)
@@ -56,13 +75,19 @@ func appendFileData(fname string, data string) {
 func main() {
 	// Simple example: dump some data to a file
 	data1 := []byte("Here is some text data\n")
-	ioutil.WriteFile("datafile.txt", data1, 0644)
+	err := ioutil.WriteFile("datafile.txt", data1, 0644)
+	if err != nil {
+		return
+	}
 
 	// More complex example: Granular writing of data
 	if !checkFileExists("testfile.txt") {
 		writeFileData()
 	} else {
-		os.Truncate("testfile.txt", 10)
+		err = os.Truncate("testfile.txt", 10)
+		if err != nil {
+			return
+		}
 		fmt.Println("Trimmed the file data")
 	}
 

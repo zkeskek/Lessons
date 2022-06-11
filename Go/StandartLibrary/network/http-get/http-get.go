@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -16,7 +17,12 @@ func getRequestTest() {
 		return
 	}
 	// The caller is responsible for closing the response
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err = Body.Close()
+		if err != nil {
+			return
+		}
+	}(resp.Body)
 
 	// We can access parts of the response to get information:
 	fmt.Println("Status:", resp.Status)

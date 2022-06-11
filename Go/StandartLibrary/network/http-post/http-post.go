@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -29,7 +30,12 @@ func postRequestTest() {
 	}
 
 	content, _ := ioutil.ReadAll(resp.Body)
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err = Body.Close()
+		if err != nil {
+			return
+		}
+	}(resp.Body)
 	fmt.Printf("%s\n", content)
 }
 
