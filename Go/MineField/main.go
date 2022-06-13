@@ -30,7 +30,7 @@ func main() {
 	fmt.Print("Level : ")
 	_, err = fmt.Scanf("%d", &level)
 
-	if err != nil || rowCount <= 0 || columnCount <= 0 || level <= 0{
+	if err != nil || rowCount <= 0 || columnCount <= 0 || level <= 0 {
 		fmt.Println("Please just positive number")
 		os.Exit(0)
 	}
