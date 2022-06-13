@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
+	"strconv"
 )
 
 var (
@@ -97,13 +98,13 @@ func (m *Mine) setBoard(row, column int) {
 	}
 	for i := row1; i <= row2; i++ {
 		for j := column1; j <= column2; j++ {
-			if mineBool[i][j] == 1{
-				mineCount++
+			if mineBool[i][j] == 1 {
+				count++
 			}
 		}
 	}
 	mineOpen += 1
-	mineBoard[row][column] = string(rune(count))
+	mineBoard[row][column] = strconv.Itoa(count)
 }
 
 func (m *Mine) isWin() bool {
