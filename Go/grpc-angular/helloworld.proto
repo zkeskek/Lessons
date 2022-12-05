@@ -24,8 +24,8 @@ message HelloResponse{
     helloworld.proto
 
   For Angular
-  protoc --plugin=protoc-gen-ts="web/node_modules/.bin/protoc-gen-ts" \
-    --js_out="import_style=commonjs,binary:web/src/app/proto" \
-    --ts_out="service=grpc-web:web/src/app/proto" helloworld.proto
+  protoc --plugin=protoc-gen-ts="./web/node_modules/.bin/protoc-gen-ts" \
+    --js_out="import_style=commonjs,binary:./web/src/app/proto" \
+    --ts_out="service=grpc-web:./web/src/app/proto" helloworld.proto
 
  */
