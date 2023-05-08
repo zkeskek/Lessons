@@ -7,6 +7,10 @@ import Helpers.Query;
 import Models.User;
 
 import javax.swing.*;
+
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.LayoutManager;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -15,26 +19,46 @@ public class LoginUI extends JFrame{
     private final Query query;
     private final LoginController loginController;
 
-    private JPanel wrapper;
-    private JPanel pnl_logo;
-    private JPanel pnl_login;
-    private JLabel lbl_logo;
-    private JLabel lbl_email;
-    private JTextField txt_email;
-    private JLabel lbl_password;
-    private JTextField txt_password;
-    private JButton btn_login;
+    private JPanel wrapper= new JPanel();
+    private JPanel pnl_logo= new JPanel();
+    private JPanel pnl_login= new JPanel();
+    private JLabel lbl_logo= new JLabel();
+    private JLabel lbl_email= new JLabel();
+    private JTextField txt_email= new JTextField();
+    private JLabel lbl_password= new JLabel();
+    private JTextField txt_password= new JTextField();
+    private JButton btn_login= new JButton();
 
     public LoginUI(Query query, LoginController loginController){
         this.query = query;
         this.loginController = loginController;
-        this.add(wrapper);
-        this.setSize(500,450);
+        this.setLayout(new GridLayout(5, 5, 5, 5));
+        
+        this.setSize(1000,950);
         this.setLocation( Helper.getScreen(this.getSize()).get("x"),  Helper.getScreen(this.getSize()).get("y") - 50);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle(Constant.TITLE);
-        this.setVisible(true);
+   
         this.setResizable(false);
+        this.setVisible(true);
+
+        wrapper.setLayout(new GridLayout(3,1,5,5));
+        wrapper.setVisible(true);;
+        wrapper.setBounds(0, 0, 400, 400);
+
+        pnl_logo.setLayout(new GridLayout(2,1,-1,-1));
+        pnl_logo.setVisible(true);;
+        pnl_logo.setBounds(0, 0, 3, 3);
+
+        pnl_logo.setLayout(new GridLayout(2,1,-1,-1));
+        pnl_logo.setVisible(true);;
+        pnl_logo.setBounds(0, 0, 3, 3);
+
+
+      
+        wrapper.add(pnl_logo);       
+        this.add(wrapper);
+        this.setVisible(true);
 
         this.txt_password.addKeyListener(new KeyAdapter() {
             @Override
